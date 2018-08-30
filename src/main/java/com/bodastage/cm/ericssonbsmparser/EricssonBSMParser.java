@@ -165,7 +165,7 @@ public class EricssonBSMParser {
                 inputFile == null || 
                 ( outputFile == null && onlyExtractParameters == false) ){
                      HelpFormatter formatter = new HelpFormatter();
-                     String header = "Parses Ericsson BSM dumps to csv\n\n";
+                     String header = "Parses Ericsson BSM hardware dumps to csv\n\n";
                      String footer = "\n";
                      footer += "Examples: \n";
                      footer += "java -jar boda-ericssonbsmparser.jar -i input_file -o out_file.csv\n";

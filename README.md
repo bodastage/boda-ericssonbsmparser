@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bodastage/boda-ericssonbsmparser.svg?branch=master)](https://travis-ci.org/bodastage/boda-ericssonbsmparser)
+
 # boda-ericssonbsmparser
 Parses Ericsson bsm_hw_export dumps to csv
 

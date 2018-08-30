@@ -262,12 +262,25 @@ public class EricssonBSMParser {
         }
         
         if (lineCount < 6 ) return;
+
+        String data = baseFileName + "," + dateTime;
         
 //        System.out.println(line);
         String[] fields = line.split("\t");
 
-        String data = baseFileName + "," + dateTime;
-        for(int i =0; i < fields.length; i++){
+        //Split dn fields
+        String[] dn = fields[0].split(",");
+        
+        for(int i = 0; i < 5; i++){
+            String d = "";
+            String pattern = "(.*)=\"(.*)\"$";        
+            Pattern r = Pattern.compile(pattern);
+            Matcher m = r.matcher(dn[i]);
+            if(m.find()) d = m.group(2);
+            data += "," + d;
+        }
+
+        for(int i =1; i < fields.length; i++){
             data += "," + toCSVFormat(fields[i]);
         }
         printWriter.println(data);
@@ -277,7 +290,7 @@ public class EricssonBSMParser {
     public void parse() throws IOException {
 
         printWriter = new PrintWriter(this.outputFile);
-        printWriter.println("FILENAME,DATETIME,DN,RUTAG,RULOGICALID,RUSERIALNO,RUREVISION,RUPOSITION,MODEL,MO,VENDOR,RU");
+        printWriter.println("FILENAME,DATETIME,SUBNETWORK,BSC,SITE,RU1,RU2,RUTAG,RULOGICALID,RUSERIALNO,RUREVISION,RUPOSITION,MODEL,MO,VENDOR,RU");
         
         if (parserState == ParserStates.EXTRACTING_PARAMETERS) {
             processFileOrDirectory();
